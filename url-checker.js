@@ -45,15 +45,31 @@ async function readLines(filePath) {
 }
 
 function buildUrl(base, suffix) {
+  // keep full URLs as-is
+  const sRaw = suffix.trim();
+  if (/^https?:\/\//i.test(sRaw)) return sRaw;
+
+  // If suffix is only a query like "?q=1", let URL() handle it against base.
+  // Otherwise make suffix relative by removing a leading slash so it doesn't
+  // override the base path.
+  let s = sRaw;
+  if (!s.startsWith("?")) {
+    s = s.replace(/^\/+/, ""); // remove leading slashes to force relative join
+  }
+
+  // Ensure base ends with a slash so new URL('x', base) appends under base's path
+  let baseNorm = base;
+  if (!baseNorm.endsWith("/")) baseNorm = baseNorm + "/";
+
   try {
-    const s = suffix.trim();
-    if (/^https?:\/\//i.test(s)) return s;
-    return new URL(s, base).toString();
+    return new URL(s, baseNorm).toString();
   } catch (e) {
-    if (!base.endsWith("/") && !suffix.startsWith("/")) return base + "/" + suffix;
-    return base + suffix;
+    // fallback: naive join
+    if (!baseNorm.endsWith("/") && !s.startsWith("/")) return baseNorm + "/" + s;
+    return baseNorm + s;
   }
 }
+
 
 async function fetchWithTimeout(url, timeoutMs = DEFAULT_TIMEOUT_MS) {
   const controller = new AbortController();
