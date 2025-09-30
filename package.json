@@ -1,0 +1,15 @@
+{
+  "name": "url-checker",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node url-checker.js",
+    "build": "echo \"no build step\""
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    /* list any runtime deps here (none required for basic fs/http/fetch) */
+  }
+}
