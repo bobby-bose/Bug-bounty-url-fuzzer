@@ -30,7 +30,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // defaults requested by the user
-const DEFAULT_BASE_URL = "https://api.crm.luminartechnolab.com";
+const DEFAULT_BASE_URL = "https://api.crm.luminartechnolab.com/api";
 const DEFAULT_CONCURRENCY = 10;
 const DEFAULT_TIMEOUT_MS = 5000;
 const DEFAULT_OUT_FILE = "results.txt";
