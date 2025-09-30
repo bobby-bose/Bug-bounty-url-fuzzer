@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: boundary-automation
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /status/health
+    ports:
+      - port: 3000
+        protocol: tcp
