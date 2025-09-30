@@ -9,7 +9,5 @@
   "engines": {
     "node": "18.x"
   },
-  "dependencies": {
-    /* list any runtime deps here (none required for basic fs/http/fetch) */
-  }
+  "dependencies": {}
 }
